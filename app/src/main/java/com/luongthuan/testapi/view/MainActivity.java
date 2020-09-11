@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newtext) {
-                //    myAdapterCity.getFilter().filter(newtext);
+                 myAdapterCity.getFilter().filter(newtext);
                 return false;
             }
         });
