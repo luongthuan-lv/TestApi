@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,19 +16,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.luongthuan.testapi.R;
 import com.luongthuan.testapi.model.Example;
-import com.luongthuan.testapi.model.ListArea;
-import com.luongthuan.testapi.view.MainActivity;
 import com.luongthuan.testapi.view.MainActivity2;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import ru.katso.livebutton.LiveButton;
 
 public class MyAdapterCity extends RecyclerView.Adapter<MyAdapterCity.CityHolder> {
     public List<Example.ListArea> listAreaList;
+
     Context context;
 
-    public MyAdapterCity(Context context) {
-        listAreaList = new ArrayList<>();
+    public MyAdapterCity(Context context, List<Example.ListArea> listAreaList) {
+        this.listAreaList = listAreaList;
         this.context = context;
     }
 
@@ -44,11 +49,11 @@ public class MyAdapterCity extends RecyclerView.Adapter<MyAdapterCity.CityHolder
 
     @Override
     public void onBindViewHolder(@NonNull CityHolder holder, int position) {
-        holder.tvAreaName.setText(listAreaList.get(position).getAreaName());
+        holder.btnLive.setText(listAreaList.get(position).getAreaName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(context, MainActivity2.class);
+                Intent intent = new Intent(context, MainActivity2.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("areaCode", listAreaList.get(position).getAreaCode());
                 intent.putExtras(bundle);
@@ -63,11 +68,11 @@ public class MyAdapterCity extends RecyclerView.Adapter<MyAdapterCity.CityHolder
     }
 
     public class CityHolder extends RecyclerView.ViewHolder {
-        TextView tvAreaName;
+        LiveButton btnLive;
 
         public CityHolder(@NonNull View itemView) {
             super(itemView);
-            tvAreaName = itemView.findViewById(R.id.tvAreaName);
+            btnLive = itemView.findViewById(R.id.btnLive);
         }
     }
 }

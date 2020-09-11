@@ -18,6 +18,8 @@ import com.luongthuan.testapi.view.MainActivity3;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.katso.livebutton.LiveButton;
+
 public class MyAdapterCommune extends RecyclerView.Adapter<MyAdapterCommune.CityHolder> {
     public List<Example.ListArea> listAreaList;
     Context context;
@@ -42,7 +44,7 @@ public class MyAdapterCommune extends RecyclerView.Adapter<MyAdapterCommune.City
 
     @Override
     public void onBindViewHolder(@NonNull CityHolder holder, int position) {
-        holder.tvAreaName.setText(listAreaList.get(position).getAreaName());
+        holder.btnLive.setText(listAreaList.get(position).getAreaName());
     }
 
     @Override
@@ -51,11 +53,12 @@ public class MyAdapterCommune extends RecyclerView.Adapter<MyAdapterCommune.City
     }
 
     public class CityHolder extends RecyclerView.ViewHolder {
-        TextView tvAreaName;
+        LiveButton btnLive;
+
 
         public CityHolder(@NonNull View itemView) {
             super(itemView);
-            tvAreaName = itemView.findViewById(R.id.tvAreaName);
+            btnLive = itemView.findViewById(R.id.btnLive);
         }
     }
 }
