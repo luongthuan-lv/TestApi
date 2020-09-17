@@ -39,6 +39,9 @@ public class AreaViewModel extends BaseObservable {
     @Bindable
     private List<Example.ListArea> listAreaList;
 
+    @Bindable
+    private String textChanged="";
+
     public AreaViewModel(Context mContext, String areaType, String parentCode) {
         this.mContext = mContext;
         this.areaType = areaType;
@@ -64,6 +67,33 @@ public class AreaViewModel extends BaseObservable {
         notifyPropertyChanged(BR.myAdapterCity);
     }
 
+    public String getTextChanged() {
+        return textChanged;
+    }
+
+    public void setTextChanged(String textChanged) {
+        this.textChanged = textChanged;
+        notifyPropertyChanged(BR.textChanged);
+    }
+
+    public void textChanged(CharSequence charSequence){
+        if (charSequence.length()==0){
+            setTextChanged("");
+            MyAdapterCity adapterCity=new MyAdapterCity(mContext,listAreaList);
+            setMyAdapterCity(adapterCity);
+        }else {
+            setTextChanged(String.valueOf(charSequence));
+            ArrayList<Example.ListArea> arrayList=new ArrayList<>();
+            for (int i = 0; i <listAreaList.size() ; i++) {
+                if (listAreaList.get(i).getAreaName().toLowerCase().contains(textChanged.toLowerCase())){
+                    arrayList.add(listAreaList.get(i));
+                }
+            }
+            MyAdapterCity adapterCity=new MyAdapterCity(mContext,arrayList);
+            setMyAdapterCity(adapterCity);
+        }
+    }
+
     public void getRetrofit(String areaType, String parentCode) {
 
         String body = BindingUtils.convertObjectToBase64(new AreaRequest(areaType, parentCode));
@@ -76,31 +106,34 @@ public class AreaViewModel extends BaseObservable {
                 String decode = response.body().getBody();
                 String endcode = new String(Base64.decode(decode, Base64.DEFAULT));
                 Example example = new Gson().fromJson(endcode, Example.class);
-                //  Log.e("DATA_NAY", example.getListArea().size() + "");
-                //  Log.e("ENDCODE", endcode);
-//                if (example != null && example.getListArea() != null) {
+//                  Log.e("DATA_NAY", example.getListArea().size() + "");
+//                  Log.e("ENDCODE", endcode);
+                if (example != null && example.getListArea() != null) {
 //                    myAdapterCity.setItems(example.getListArea());
 //                    rvListCity.setAdapter(myAdapterCity);
 //                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
 //                    rvListCity.setLayoutManager(linearLayoutManager);
-//                } else {
-//                    Toast.makeText(mContext, "Lỗi Data", Toast.LENGTH_SHORT).show();
-//                }
 
-                listAreaList=new ArrayList<>();
-                listAreaList.addAll(example.getListArea());
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    listAreaList.sort(Comparator.comparing(Example.ListArea::getFullName));
+                    listAreaList=new ArrayList<>();
+                    listAreaList.addAll(example.getListArea());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        listAreaList.sort(Comparator.comparing(Example.ListArea::getFullName));
+                    }
+                    setListAreaList(listAreaList);
+                    MyAdapterCity adapterCity=new MyAdapterCity(mContext,listAreaList);
+                    setMyAdapterCity(adapterCity);
+
+                } else {
+                    Toast.makeText(mContext, "Lỗi Data", Toast.LENGTH_SHORT).show();
                 }
-                setListAreaList(listAreaList);
-                MyAdapterCity adapterCity=new MyAdapterCity(mContext,listAreaList);
-                setMyAdapterCity(adapterCity);
+
+
             }
 
             @Override
             public void onFailure(Call<ResponseBase64> call, Throwable t) {
                 Log.e("EROR", t.getMessage());
-                Toast.makeText(mContext, "Lỗi mẹ rồi còn gì", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Lỗi rồi bạn ơi", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -40,6 +40,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     MyAdapterCity myAdapterCity;
+    List<Example.ListArea> listAreaList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,31 +48,5 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ActivityMainBinding binding= DataBindingUtil.setContentView(this,R.layout.activity_main);
         binding.setViewModel(new AreaViewModel(this, "P",""));
-    }
-
-
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Tìm kiếm...");
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newtext) {
-                myAdapterCity.getFilter().filter(newtext);
-                return false;
-            }
-        });
-        return true;
     }
 }

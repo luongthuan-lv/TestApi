@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -35,9 +36,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.katso.livebutton.LiveButton;
 
-public class MyAdapterCity extends RecyclerView.Adapter<MyAdapterCity.CityHolder> implements Filterable {
+public class MyAdapterCity extends RecyclerView.Adapter<MyAdapterCity.CityHolder> {
     public List<Example.ListArea> listAreaList;
-    public ArrayList<Example.ListArea> arrayListOne;
     Context context;
     public LayoutInflater layoutInflater;
 
@@ -49,10 +49,9 @@ public class MyAdapterCity extends RecyclerView.Adapter<MyAdapterCity.CityHolder
 
     public void setItems(List<Example.ListArea> items) {
 
-        listAreaList.clear();
-        listAreaList.addAll(items);
-        this.arrayListOne = new ArrayList<>(items);
-        notifyDataSetChanged();
+            listAreaList.clear();
+            listAreaList.addAll(items);
+            notifyDataSetChanged();
 
     }
 
@@ -68,13 +67,6 @@ public class MyAdapterCity extends RecyclerView.Adapter<MyAdapterCity.CityHolder
 
     @Override
     public void onBindViewHolder(@NonNull CityHolder holder, int position) {
-//        holder.btnLive.setText(listAreaList.get(position).getAreaName());
-//        holder.btnLive.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
         holder.rowBinding.setListarea(listAreaList.get(position));
         holder.rowBinding.btnLive.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,59 +102,26 @@ public class MyAdapterCity extends RecyclerView.Adapter<MyAdapterCity.CityHolder
                 Example example = new Gson().fromJson(endcode, Example.class);
                 Log.e("DATA_NAY", example.getListArea().size() + "");
                 Log.e("ENDCODE", endcode);
-                ArrayList<Example.ListArea> arrayList = new ArrayList<>();
-                arrayList.addAll(example.getListArea());
-                setItems(arrayList);
+
+                    ArrayList<Example.ListArea> arrayList = new ArrayList<>();
+                    arrayList.addAll(example.getListArea());
+                    setItems(arrayList);
             }
 
             @Override
             public void onFailure(Call<ResponseBase64> call, Throwable t) {
                 Log.e("EROR", t.getMessage());
-                Toast.makeText(context, "Lỗi mẹ rồi còn gì", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Lại lỗi", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @Override
-    public Filter getFilter() {
-        return filter;
-    }
-
-    Filter filter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-            ArrayList<Example.ListArea> arrayListTwo = new ArrayList<>();
-            if (charSequence.length() == 0) {
-                Toast.makeText(context, arrayListOne.size() + "", Toast.LENGTH_SHORT).show();
-                arrayListTwo.addAll(arrayListOne);
-            } else {
-
-                for (int i = 0; i < arrayListOne.size(); i++) {
-                    if (arrayListOne.get(i).getAreaName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
-                        arrayListTwo.add(arrayListOne.get(i));
-                    }
-                }
-            }
-            FilterResults filterResults = new FilterResults();
-            filterResults.values = arrayListTwo;
-            return filterResults;
-        }
-
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            listAreaList.clear();
-            listAreaList.addAll((Collection<? extends Example.ListArea>) filterResults.values);
-            notifyDataSetChanged();
-        }
-    };
-
     public class CityHolder extends RecyclerView.ViewHolder {
-        LiveButton btnLive;
         public final RowBinding rowBinding;
 
         public CityHolder(@NonNull RowBinding itemView) {
             super(itemView.getRoot());
-            this.rowBinding=itemView;
+            this.rowBinding = itemView;
         }
     }
 }
