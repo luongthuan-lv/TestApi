@@ -1,11 +1,15 @@
 
 package com.luongthuan.testapi.model;
 
-import java.util.List;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Example {
+import java.util.List;
+
+public class Example extends BaseObservable {
 
     @SerializedName("cost")
     @Expose
@@ -20,6 +24,7 @@ public class Example {
     @Expose
     private List<ListArea> listArea = null;
 
+    @Bindable
     public Integer getCost() {
         return cost;
     }
@@ -28,6 +33,7 @@ public class Example {
         this.cost = cost;
     }
 
+    @Bindable
     public String getResultCode() {
         return resultCode;
     }
@@ -36,6 +42,7 @@ public class Example {
         this.resultCode = resultCode;
     }
 
+    @Bindable
     public String getResultDesc() {
         return resultDesc;
     }
@@ -44,6 +51,7 @@ public class Example {
         this.resultDesc = resultDesc;
     }
 
+    @Bindable
     public List<ListArea> getListArea() {
         return listArea;
     }
@@ -51,7 +59,8 @@ public class Example {
     public void setListArea(List<ListArea> listArea) {
         this.listArea = listArea;
     }
-    public class ListArea {
+
+    public class ListArea extends BaseObservable {
 
         @SerializedName("redis_meta")
         @Expose
@@ -93,6 +102,7 @@ public class Example {
         @Expose
         private String status;
 
+        @Bindable
         public RedisMeta getRedisMeta() {
             return redisMeta;
         }
@@ -101,6 +111,7 @@ public class Example {
             this.redisMeta = redisMeta;
         }
 
+        @Bindable
         public String getRedisKey() {
             return redisKey;
         }
@@ -109,6 +120,7 @@ public class Example {
             this.redisKey = redisKey;
         }
 
+        @Bindable
         public Integer getId() {
             return id;
         }
@@ -117,6 +129,7 @@ public class Example {
             this.id = id;
         }
 
+        @Bindable
         public String getAreaType() {
             return areaType;
         }
@@ -125,6 +138,7 @@ public class Example {
             this.areaType = areaType;
         }
 
+        @Bindable
         public String getAreaCode() {
             return areaCode;
         }
@@ -133,6 +147,7 @@ public class Example {
             this.areaCode = areaCode;
         }
 
+        @Bindable
         public String getParentCode() {
             return parentCode;
         }
@@ -141,6 +156,7 @@ public class Example {
             this.parentCode = parentCode;
         }
 
+        @Bindable
         public String getProvince() {
             return province;
         }
@@ -149,6 +165,7 @@ public class Example {
             this.province = province;
         }
 
+        @Bindable
         public String getDistrict() {
             return district;
         }
@@ -157,6 +174,7 @@ public class Example {
             this.district = district;
         }
 
+        @Bindable
         public String getPrecinct() {
             return precinct;
         }
@@ -165,6 +183,7 @@ public class Example {
             this.precinct = precinct;
         }
 
+        @Bindable
         public String getAreaName() {
             return areaName;
         }
@@ -173,6 +192,7 @@ public class Example {
             this.areaName = areaName;
         }
 
+        @Bindable
         public String getFullName() {
             return fullName;
         }
@@ -181,6 +201,7 @@ public class Example {
             this.fullName = fullName;
         }
 
+        @Bindable
         public String getOrderNo() {
             return orderNo;
         }
@@ -189,6 +210,7 @@ public class Example {
             this.orderNo = orderNo;
         }
 
+        @Bindable
         public String getStatus() {
             return status;
         }
@@ -199,12 +221,13 @@ public class Example {
 
     }
 
-    public class RedisMeta {
+    public class RedisMeta extends BaseObservable {
 
         @SerializedName("timeMark")
         @Expose
         private Integer timeMark;
 
+        @Bindable
         public Integer getTimeMark() {
             return timeMark;
         }

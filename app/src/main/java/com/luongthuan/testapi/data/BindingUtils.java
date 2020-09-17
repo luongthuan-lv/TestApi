@@ -7,7 +7,8 @@ import com.luongthuan.testapi.data.Config;
 
 import java.io.UnsupportedEncodingException;
 
-public class StringUtils {
+public class BindingUtils {
+
     public static String convertObjectToBase64(Object o) {
         Gson gson = new Gson();
         String json = gson.toJson(o);

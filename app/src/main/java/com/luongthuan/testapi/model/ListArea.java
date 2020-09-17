@@ -1,10 +1,13 @@
 
 package com.luongthuan.testapi.model;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ListArea {
+public class ListArea extends BaseObservable {
 
     @SerializedName("redis_meta")
     @Expose
@@ -46,6 +49,7 @@ public class ListArea {
     @Expose
     private String status;
 
+    @Bindable
     public RedisMeta getRedisMeta() {
         return redisMeta;
     }
@@ -54,6 +58,7 @@ public class ListArea {
         this.redisMeta = redisMeta;
     }
 
+    @Bindable
     public String getRedisKey() {
         return redisKey;
     }
@@ -62,6 +67,7 @@ public class ListArea {
         this.redisKey = redisKey;
     }
 
+    @Bindable
     public Integer getId() {
         return id;
     }
@@ -70,6 +76,7 @@ public class ListArea {
         this.id = id;
     }
 
+    @Bindable
     public String getAreaType() {
         return areaType;
     }
@@ -78,6 +85,7 @@ public class ListArea {
         this.areaType = areaType;
     }
 
+    @Bindable
     public String getAreaCode() {
         return areaCode;
     }
@@ -86,6 +94,7 @@ public class ListArea {
         this.areaCode = areaCode;
     }
 
+    @Bindable
     public String getParentCode() {
         return parentCode;
     }
@@ -94,6 +103,7 @@ public class ListArea {
         this.parentCode = parentCode;
     }
 
+    @Bindable
     public String getProvince() {
         return province;
     }
@@ -102,6 +112,7 @@ public class ListArea {
         this.province = province;
     }
 
+    @Bindable
     public String getDistrict() {
         return district;
     }
@@ -110,6 +121,7 @@ public class ListArea {
         this.district = district;
     }
 
+    @Bindable
     public String getPrecinct() {
         return precinct;
     }
@@ -118,6 +130,7 @@ public class ListArea {
         this.precinct = precinct;
     }
 
+    @Bindable
     public String getAreaName() {
         return areaName;
     }
@@ -126,6 +139,7 @@ public class ListArea {
         this.areaName = areaName;
     }
 
+    @Bindable
     public String getFullName() {
         return fullName;
     }
@@ -134,6 +148,7 @@ public class ListArea {
         this.fullName = fullName;
     }
 
+    @Bindable
     public Integer getOrderNo() {
         return orderNo;
     }
@@ -142,6 +157,7 @@ public class ListArea {
         this.orderNo = orderNo;
     }
 
+    @Bindable
     public String getStatus() {
         return status;
     }

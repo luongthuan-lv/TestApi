@@ -1,9 +1,12 @@
 package com.luongthuan.testapi.model;
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AreaRequest {
+public class AreaRequest extends BaseObservable {
     @SerializedName("areaType")
     @Expose
     private String areaType;
@@ -15,6 +18,8 @@ public class AreaRequest {
         this.areaType = areaType;
         this.parentCode = parentCode;
     }
+
+    @Bindable
     public String getAreaType() {
         return areaType;
     }
@@ -23,6 +28,7 @@ public class AreaRequest {
         this.areaType = areaType;
     }
 
+    @Bindable
     public String getParentCode() {
         return parentCode;
     }

@@ -17,15 +17,6 @@ public class ReqApiUtils {
 
         }
         requestBase64.setRequestHeader(Config.Header.getHeader());
-//        Log.d("Base64", function + "-----" + requestBase64.toString());
-//        Log.d("BodyEncode", function + "-----" + requestBase64.getBody());
-//        try {
-//            byte[] data = Base64.decode(body, Base64.DEFAULT);
-//            String requestBody = new String(data, Config.CHARSET_NAME);
-//            Log.d("requestBodyDecode: ", function + " *** " + requestBody);
-//            Log.d("request", function + "------------------------------------\n");
-//        } catch (java.lang.Exception ignored) {
-//        }
         return requestBase64;
     }
 }
