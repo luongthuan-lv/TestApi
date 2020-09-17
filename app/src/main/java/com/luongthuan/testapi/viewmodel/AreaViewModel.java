@@ -106,14 +106,7 @@ public class AreaViewModel extends BaseObservable {
                 String decode = response.body().getBody();
                 String endcode = new String(Base64.decode(decode, Base64.DEFAULT));
                 Example example = new Gson().fromJson(endcode, Example.class);
-//                  Log.e("DATA_NAY", example.getListArea().size() + "");
-//                  Log.e("ENDCODE", endcode);
                 if (example != null && example.getListArea() != null) {
-//                    myAdapterCity.setItems(example.getListArea());
-//                    rvListCity.setAdapter(myAdapterCity);
-//                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
-//                    rvListCity.setLayoutManager(linearLayoutManager);
-
                     listAreaList=new ArrayList<>();
                     listAreaList.addAll(example.getListArea());
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
